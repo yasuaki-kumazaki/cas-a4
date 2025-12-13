@@ -38,6 +38,10 @@ Then run:
 ```bash
 python run_match.py
 ```
+or
+```bash
+python3 run_match.py
+```
 
 ## Strategy Interface (What You Must Implement)
 
