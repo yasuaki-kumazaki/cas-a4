@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Protocol, Deque
+from dataclasses import dataclass
 
 from shared.types import MatchResult, Observation
+from collections import deque
 import random
+
+
 
 class G8:
     """
@@ -13,7 +17,7 @@ class G8:
     - on_result(result)
     """
     name="G8"
-    ALPHA = 0.8
+    ALPHA = 0.2
 
     def __init__(self)->None:
         self.N = 0
@@ -46,6 +50,7 @@ class G8:
         total = sum(self.f)
         self.f = [x / total for x in self.f]
 
+
     def act(self, obs: Observation) -> int:
         """
         Called EVERY round to choose a bid.
@@ -66,8 +71,13 @@ class G8:
         """
         self.rounds_played += 1
 
-        if result.self_payoff > 0:
-            self.wins[result.self_action - 1] += 1
+        a = result.self_action
+        b = result.opp_action
+
+        if a < b:
+            self.wins[a - 1] += 1
+        elif b < a:
+            self.wins[b - 1] += 1
 
         p_win = [
             self.wins[i] / self.rounds_played
