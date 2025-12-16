@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from typing import Protocol, Deque
+import random
+from collections import deque
 from dataclasses import dataclass
+from typing import Deque, Protocol
 
 from shared.types import MatchResult, Observation
-from collections import deque
-import random
-
 
 
 class G8:
